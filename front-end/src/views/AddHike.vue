@@ -25,16 +25,38 @@
         </div>
       <h1>Reviews</h1>
 
+        <h1>Reviews</h1>
+        <div class="review" v-for="review in currentHike.reviews" :key="review">
 
+        <h2>"{{review}}"</h2>
+        <button class = 'btn btn-xs btn-danger' @click = deleteReview(review)>Delete</button>
+        </div>
 
-        <div class = "reviews" v-if ="reviews.length > 0">
-          <div class = "reviews" v-for="r in reviews" :key="r.id" @click="selectReview(s)"> {{r.userName}}
-            <div class = "reviews" v-if="r.hikeName == currentHike.hikeName">
-              <button @click="deleteReview(findReview)">Delete</button>
-              <button @click="editReview(findReview)">Edit</button>
+        <h1>Add Your Own Review</h1>
+        <form>
+            <div class="input">
+            <input type = "text" v-model="text" placeholder="Review">
+      </div>
+      <div class= "username">
+        <input type ="text" v-model ="userName" placeholder="Username">
+      </div>
+            <button type = "submit" @click="upload(currentHike)" >Submit</button>
+        </form>
+          <div class = "reviews" v-for="r in reviews" :key="r.id" @click="selectReview(r)"> 
+
+            <div  v-if="r.hikeName === currentHike.hikeName">
+              <h3 class="overflow">"{{r.text}}"</h3>
+             <div class="userReview">
+                <em><h4>-{{r.userName}}</h4></em>
+             </div>
+              <button @click="deleteReview(r)">Delete</button>
+              <div v-if="editBox">
+                <textarea v-model="newText"></textarea>
+                <button @click="editReview(r)">Submit</button>
+              </div>
+              <button v-if="!editBox" @click="editButton">Edit</button>
             </div>
           </div>
-        </div>
 
 
 
@@ -53,20 +75,29 @@ export default {
       addReview: null,
       findHikeName: "",
       findReview: "",
+      editBox:false,
+      newText:"",
     }
   },
 
   computed: {
+    currentHike(){
+      return this.$root.$data.currentHike;
+    }
+    
     },
     created() {
       this.getReviews();
     },
 
   methods: {
-    async upload() {
+    editButton(){
+      this.editBox =true;
+    },
+    async upload(currentHike) {
       try {
         let r1 = await axios.post('/api/reviews', {
-          hikeName: this.hikeName,
+          hikeName: currentHike.hikeName,
           userName: this.userName,
           text: this.text,
         });
@@ -102,7 +133,13 @@ export default {
 
     async editReview(review) {
       try {
-        await axios.put("/api/reviews/" + review._id);
+        await axios.put("/api/reviews/" + review._id,{
+          hikeName:this.currentHike.hikeName,
+          userName:review.userName,
+          text:this.newText
+        });
+        this.editBox = false;
+        this.newText = null;
         this.findReview = null;
         this.getReviews();
         return true;
@@ -116,7 +153,25 @@ export default {
 
 
 <style scoped>
+.overflow{
+  width: 800px;
+  overflow-wrap: break-word;
+}
+.userReview{
+padding-left: 200px;}
 
+.hikeNameDiv {
+  color: white;
+  height:0px;
+  width:0px;
+}
+
+.username{
+width: 20%;
+border: #000 solid 3px;
+margin-top: 20px;
+
+}
 .buttons {
   display: flex;
   justify-content: right;
@@ -126,7 +181,7 @@ export default {
 }
 .input {
     border: solid black 3px;
-    height: 100px;
+    height: 30px;
 }
 input[type=checkbox] {
     transform: scale(1.5);
@@ -146,7 +201,9 @@ button {
     float: left;
     margin-right: 10px;
 }
-.review {
+.reviews {
+    display:flex;
+    overflow: auto;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding-top: 10px;
     
@@ -205,7 +262,7 @@ input {
   border: none !important;
   box-shadow: none !important;
   width: 100%;
-  height: 40px;
+  height: 25px;
 }
 
 .info {

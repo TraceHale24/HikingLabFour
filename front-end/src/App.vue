@@ -1,7 +1,7 @@
 <template>
 <div id="app">
   <div class = "title">
-  <h1>Hike Utah with Trace</h1>
+  <h1>Hike Utah with Trace and Conner</h1>
   </div>
   <div id="menu">
     <div id = "leftside">

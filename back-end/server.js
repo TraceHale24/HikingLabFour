@@ -18,7 +18,8 @@ const mongoose = require('mongoose');
 
 // connect to the database
 mongoose.connect('mongodb://localhost:27017/hikes', {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 
@@ -105,10 +106,6 @@ app.put('/api/hikes/:id', async(req,res) => {
 });
 
 
-//connect to the database
-mongoose.connect('mongodb://localhost:27018/reviews', {
-  useNewUrlParser: true
-});
 
 
 const reviewSchema = new mongoose.Schema({
