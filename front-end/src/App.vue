@@ -31,8 +31,8 @@
 
 <div class ='footer'>
   <div class= 'footer-item'>
-    <h3><a href = 'https://github.com/TraceHale24/CreativeLabThreeRedone'>Github</a></h3>
-    <h3><a href="https://www.linkedin.com/in/trace-hale-b3a998169/">LinkedIn</a></h3>
+    <h3> Trace Hale and Conner Hammond</h3>
+    <h3><a href = 'https://github.com/TraceHale24/HikingLabFour'>Github</a></h3>
   </div>
 </div>
 </div>
@@ -77,7 +77,7 @@ h1 {
 #rightside {
   grid-area: side;
   display: flex;
-  justify-content: right;
+  justify-content: center;
 }
 
 #rightside img {
@@ -85,9 +85,10 @@ h1 {
 }
 
 #leftside {
-  padding-left: 200px;
+  grid-area:auto;
   display: flex;
-  justify-content: left;
+  justify-content: center;
+  padding-left: auto;
 }
 
 #leftside img {
@@ -115,19 +116,19 @@ h1 {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding-top: 100px;
+  padding-top: 75px;
 }
 
 .footer-item {
   border: 3px solid black;
   border-radius: 10px;
   background-color: forestgreen;
-  color: #2F2FA2;
+  color: white;
   height: 150px;
   width: fit-content;
   flex: 1;
   padding-left: 70px;
-  padding-top: 25px;
+  padding-top: 5px;
   position:sticky;
   width: 100%;
   bottom:0;

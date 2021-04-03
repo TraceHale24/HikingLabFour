@@ -4,19 +4,20 @@
     <div class="heading">
       <h2><u>Add a Hike</u></h2>
     </div>
-    <div class="add">
-      <div class="form">
-        <input v-model="hikeName" placeholder="Name of Hike">
-        <p></p>
-            <textarea v-model="rating" placeholder="Hike Rating"></textarea>
-        <p></p>
-            <textarea v-model="length" placeholder="Length"></textarea>
-        <p></p>
-            <textarea v-model="time" placeholder="Time"></textarea>
-        <p></p>
-            <textarea v-model="destination" placeholder="Destination"></textarea>
-        <p></p>
-        <input type="file" name="path" @change="fileChanged">
+      <div class = 'form'>
+      <table>
+        <tr class= "tr">
+          <td><textarea v-model="hikeName" placeholder="Name of Hike"></textarea></td>
+          <td><textarea v-model="rating" placeholder="Hike Rating - Out of 5"></textarea></td>
+          <td><textarea v-model="length" placeholder="Hike Description"></textarea></td>
+        </tr>
+        <tr>
+          <td><textarea v-model="time" placeholder="Time - x Hours y Minutes"></textarea></td>
+          <td><textarea v-model="destination" placeholder="Destination"></textarea></td>
+          <td><input type="file" name="path" @change="fileChanged"></td>
+        </tr>
+      </table>
+
         <button @click="upload">Upload</button>
       </div>
       <div class="upload" v-if="addHike">
@@ -28,7 +29,6 @@
   
         <img :src="addHike.path" />
       </div>
-    </div>
  <div class="heading">
     <h2><u>Edit a Hike</u></h2>
   </div>
@@ -157,6 +157,16 @@ export default {
 </script>
 
 <style scoped>
+table, tr{
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  border: 3px solid black;
+  border-radius: 3px;
+}
+
 .image h2 {
   font-style: italic;
   font-size: 1em;

@@ -23,9 +23,7 @@
         <div class="time">
           <p>Distance: {{currentHike.length}} Miles</p>
         </div>
-      <h1>Reviews</h1>
 
-        <h1>Reviews</h1>
         <div class="review" v-for="review in currentHike.reviews" :key="review">
 
         <h2>"{{review}}"</h2>
@@ -37,11 +35,14 @@
             <div class="input">
             <input type = "text" v-model="text" placeholder="Review">
       </div>
+
       <div class= "username">
         <input type ="text" v-model ="userName" placeholder="Username">
       </div>
             <button type = "submit" @click="upload(currentHike)" >Submit</button>
         </form>
+                      <h1>Reviews</h1>
+
           <div class = "reviews" v-for="r in reviews" :key="r.id" @click="selectReview(r)"> 
 
             <div  v-if="r.hikeName === currentHike.hikeName">
@@ -49,18 +50,16 @@
              <div class="userReview">
                 <em><h4>-{{r.userName}}</h4></em>
              </div>
+             <div class = "buttons">
               <button @click="deleteReview(r)">Delete</button>
               <div v-if="editBox">
                 <textarea v-model="newText"></textarea>
                 <button @click="editReview(r)">Submit</button>
               </div>
               <button v-if="!editBox" @click="editButton">Edit</button>
+             </div>
             </div>
           </div>
-
-
-
-
       </div>
 </template>
 
@@ -77,6 +76,8 @@ export default {
       findReview: "",
       editBox:false,
       newText:"",
+      userName: "",
+      text: "",
     }
   },
 
@@ -101,6 +102,7 @@ export default {
           userName: this.userName,
           text: this.text,
         });
+        this.$root.$data.currentHike = currentHike;
         this.addReview = r1.data; 
       } catch(error){
         //console.log(error);
@@ -193,11 +195,11 @@ input[type=text] {
 }
 
 button {
+    margin-top: 5px;
     display: flex;
     font-family: 'Arvo';
     font-size: 1em;
-    margin-left: 88.75%;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
     float: left;
     margin-right: 10px;
 }
@@ -205,7 +207,13 @@ button {
     display:flex;
     overflow: auto;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding-top: 10px;
+    padding-top: 5px;
+    justify-content: center;
+    border:black solid 2px;
+    padding-left: -100px;
+    padding-right: -75px;
+    margin-bottom: 4px;
+    margin-top: 15px;
     
 }
 .name {
