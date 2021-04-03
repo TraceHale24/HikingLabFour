@@ -51,8 +51,6 @@
         <p></p>
             <textarea v-model="findHike.destination"></textarea>
         <p></p>
-        <input type="file" name="path" @change="fileChanged">
-          <img :src="findHike.path"/>
       </div>
         <div class="actions" v-if="findHike">
           <button @click="deleteHike(findHike)">Delete</button>
@@ -143,6 +141,7 @@ export default {
           length: this.findHike.length,
           time: this.findHike.time,
           destination: this.findHike.destination,
+          path: this.findHike.path,
         });
         this.findHike = null;
         this.getHikes();
